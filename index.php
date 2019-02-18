@@ -45,18 +45,52 @@
             <td><?= $row['time']?></td>
             <td>
               <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-primary">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
+                <!-- change button to button to anchor tags -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal<?= $row['id']?>">Edit</button>
+                <a href="delete_todo.php?id=<?= $row['id']?>" class="btn btn-danger">Delete</a>
               </div>
             </td>
           </tr>
+          <!-- edit modal-->
+          <div class="modal fade" id="editModal<?= $row['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <form action="edit_todo.php?id=<?= $row['id']?>" method="POST">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Todo List</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label for="title">Title</label>
+                      <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title" value="<?= $row['title']?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="description">Example textarea</label>
+                      <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter Description"><?= $row['description']?></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="time">time</label>
+                      <input type="text" class="form-control" id="time" name="time" placeholder="Enter Time" value="<?= $row['time']?>">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
           <?php endwhile;?>
         </tbody>
       </table>
 
     </div>
 
-    <!-- Modal -->
+    <!-- Create Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
